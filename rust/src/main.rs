@@ -1,5 +1,5 @@
 mod leetcode;
-mod tempalte;
+mod template;
 
 fn main() {
     println!("Hello, world!");
