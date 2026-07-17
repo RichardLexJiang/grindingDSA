@@ -1,3 +1,8 @@
+# Deprecated
+gonna rewrite all of these into rust 
+gonna rewrite all the comments of these into English
+
+
 # acm
 
 毕业后吃饱了撑没事干写写题,缅怀以前打ACM的日子.
