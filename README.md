@@ -1,7 +1,5 @@
 # Deprecated
-gonna rewrite all of these into rust 
-gonna rewrite all the comments of these into English
-
+move to [DSL-grinding](https://github.com/RichardLexJiang/DSA-grinding)
 
 # acm
 
