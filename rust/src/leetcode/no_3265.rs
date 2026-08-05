@@ -1,4 +1,3 @@
-
 impl Solution {
     pub fn count_pairs(nums: Vec<i32>) -> i32 {
         let mut count = 0;
@@ -13,9 +12,9 @@ impl Solution {
     }
 
     fn is_similar(mut a: i32, mut b: i32) -> bool {
-        let mut aa: [u8; 6] = [0; 6];
-        let mut ba: [u8; 6] = [0; 6];
-        for i in 0..6 {
+        let mut aa: [u8; 7] = [0; 7];
+        let mut ba: [u8; 7] = [0; 7];
+        for i in 0..7 {
             aa[i] = (a % 10) as u8;
             ba[i] = (b % 10) as u8;
             a /= 10;
@@ -23,7 +22,7 @@ impl Solution {
         }
         let mut pre_diff: i32 = -1;
         let mut diff_count = 0;
-        for i in 0..6 {
+        for i in 0..7 {
             if aa[i] != ba[i] {
                 if pre_diff != -1 {
                     if aa[pre_diff as usize] == ba[i] && aa[i] == ba[pre_diff as usize] {
@@ -47,6 +46,7 @@ impl Solution {
 
 #[test]
 fn test() {
+    assert_eq!(dbg!(Solution::count_pairs(vec![1000000, 1, 100000])), 3);
     assert_eq!(dbg!(Solution::count_pairs(vec![3, 12, 30, 17, 21])), 2);
     assert_eq!(dbg!(Solution::count_pairs(vec![1, 1, 1, 1, 1])), 10);
     assert_eq!(

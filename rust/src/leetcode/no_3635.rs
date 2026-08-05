@@ -56,8 +56,8 @@ impl Solution {
         after_min_end_time.reverse();
         let mut min_end_time = i32::MAX;
         for (s, d) in a {
-            let mut i = b
-                .binary_search_by_key(&(*s + *d), |(x1, x2)| *x1)
+            let i = b
+                .binary_search_by_key(&(*s + *d), |(x1, _)| *x1)
                 .unwrap_or_else(|r| r);
             if i == b.len() {
                 min_end_time = min_end_time.min(*s + *d + before_min_duration[i - 1]);

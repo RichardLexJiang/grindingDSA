@@ -1,2 +1,2 @@
-
-题解，java版
+Java Version Grinding  
+Because of historic reason , most are Chinese comments  

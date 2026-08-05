@@ -1,18 +1,14 @@
 
 struct Solution {}
 
-/** 
-给你一个字符串 s，找到 s 中最长的回文子串 
- **/
 impl Solution {
-    // 最长回文子串
     pub fn longest_palindrome(s: String) -> String {
         Self::spread_from_center(s)
     }
     
     
     /**
-        **动态规划法**
+        **DP**  
         dp\[i\]\[j\] = dp\[i+1\]\[j-1\] && s\[i\] == s\[j\]
      */
     #[allow(dead_code)]

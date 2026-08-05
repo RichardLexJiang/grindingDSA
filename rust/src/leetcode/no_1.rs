@@ -1,6 +1,8 @@
 struct Solution {}
 
 impl Solution {
+
+    /** two pointer */
     pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
         let mut sorted: Vec<(i32, i32)> = nums.to_vec().iter().enumerate()
             .map(|x| (*x.1, x.0 as i32))
