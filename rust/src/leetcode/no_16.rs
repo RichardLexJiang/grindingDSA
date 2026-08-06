@@ -29,6 +29,7 @@ impl Solution {
         closest
     }
 
+    #[allow(unused)]
     pub fn two_pointer_and_binary_search(nums: Vec<i32>, target: i32) -> i32 {
         trait SearchClosest {
             fn search(&self, start: usize, target: i32) -> usize;
