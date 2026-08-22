@@ -6,7 +6,7 @@
 
 ## LeetCode Grinding
 
-|     题号      |                           题名                           |   难度   |                                                  简介                                                  |                                               题解                                               |
+|     No      |                           Title                           |   difficulty   |                                                  desc                                                  |                                               code                                               |
 |:-----------:|:------------------------------------------------------:|:------:|:----------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------:|
 |      1      |                        Two Sum                         |  Easy  |                                         1.two pointer 2.Map                                          |       [java](java/src/leetCode/repository/No1.java)    [rust](rust/src/leetcode/no_1.rs)       |
 |      2      |                    Add Two Numbers                     | Medium |                                           rugular problem                                            |       [java](java/src/leetCode/repository/No2.java)    [rust](rust/src/leetcode/no_2.rs)       |
