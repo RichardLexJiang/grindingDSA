@@ -1,53 +1,38 @@
 // floyd's tortoise and hare
 impl Solution {
-    pub fn remove_nth_from_end(head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
-        Self::remove_nth_from_end_v1(head, n)
-    }
-
-    /// # V1 version
+    ///
+    /// It's too difficult to write a O(1) space code in RUST (the borrow check...)  
     ///
     /// - runtime complexity: O(n)  
     /// - memory complexity: O(n)  
     ///
     /// the old version use O(n) space, consider modifying the list in-place using pointer manipulation instead of creating a new list to achieve O(1) space.
-    pub fn remove_nth_from_end_v1(head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
-        let Some(head) = head else {
-            return None;
-        };
-        let mut i = 1;
-        let mut hare = &head;
-        while i < n {
-            hare = hare.next.as_ref().expect("impossible");
-            i += 1;
+    pub fn remove_nth_from_end(head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
+        let dummy = Some(Box::new(ListNode {
+            val: -999,
+            next: head,
+        }));
+
+        let mut hare = dummy.as_ref();
+        for _ in 0..(n) {
+            hare = hare.and_then(|t| t.next.as_ref());
         }
-
-        let mut new_head: Option<Box<ListNode>> = None;
-        let mut new_list_ptr = &mut new_head;
-        let mut tortoise = Some(&head);
-        let mut removed_flag = false;
-        while tortoise.is_some() {
-            if removed_flag || hare.next.is_some() {
-                let current_value = tortoise.as_ref().map(|t| t.val).unwrap();
-                // set the value from tortoise
-                if new_list_ptr.is_none() {
-                    new_list_ptr.replace(Box::new(ListNode::new(current_value)));
-                } else {
-                    if let Some(ptr) = new_list_ptr.as_mut() {
-                        ptr.next.replace(Box::new(ListNode::new(current_value)));
-                    }
-                    new_list_ptr = new_list_ptr.as_mut().map(|t| &mut t.next).unwrap();
-                }
-            } else {
-                removed_flag = true;
-            }
-
-            tortoise = tortoise.and_then(|t| t.next.as_ref());
-            if !removed_flag {
-                hare = hare.next.as_ref().unwrap();
-            }
+        let mut new_dummy = Some(Box::new(ListNode {
+            val: -999,
+            next: None,
+        }));
+        let mut new_tail = &mut new_dummy;
+        let mut tortoise = dummy.as_ref();
+        while hare.is_some() {
+            //move forward together
+            hare = hare.expect("impossible").next.as_ref();
+            tortoise = tortoise.expect("impossible").next.as_ref();
+            new_tail = new_tail.as_mut().map(|t| &mut t.next).unwrap();
+            //copy tortoise node to new chain
+            *new_tail = tortoise.as_ref().map(|t| Box::new(ListNode::new(t.val)));
         }
-
-        new_head
+        tortoise.map(|t| *new_tail = t.next.clone());
+        new_dummy.expect("impossible").next
     }
 }
 
