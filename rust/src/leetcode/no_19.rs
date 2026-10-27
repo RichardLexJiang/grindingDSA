@@ -1,13 +1,41 @@
 // floyd's tortoise and hare
 impl Solution {
+    pub fn remove_nth_from_end(head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
+        Solution::two_pass_n_space(head, n)
+    }
+
     ///
-    /// It's too difficult to write a O(1) space code in RUST (the borrow check...)  
+    /// 2 pass O(1) space . very regular way
+    ///
+    /// - runtime complexity: O(n)
+    /// - memory complexity: O(1)
+    ///
+    fn two_pass_n_space(mut head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
+        let mut len = 0;
+        let mut ptr = head.as_ref();
+        while ptr.is_some() {
+            ptr = ptr.and_then(|t| t.next.as_ref());
+            len += 1;
+        }
+        let target = len - n;
+        let mut ptr = &mut head;
+        for _ in 0..target {
+            ptr = ptr.as_mut().map(|t| &mut t.next).expect("impossible");
+        }
+        *ptr = ptr.as_mut().map(|t| t.next.take()).expect("impossible");
+
+        return head;
+    }
+
+    ///
+    /// 1 pass O(n) space . It's too difficult to write a O(1) space code in RUST (the borrow check...)  
     ///
     /// - runtime complexity: O(n)  
     /// - memory complexity: O(n)  
     ///
     /// the old version use O(n) space, consider modifying the list in-place using pointer manipulation instead of creating a new list to achieve O(1) space.
-    pub fn remove_nth_from_end(head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
+    #[allow(dead_code)]
+    fn one_pass_n_space(head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
         let dummy = Some(Box::new(ListNode {
             val: -999,
             next: head,
